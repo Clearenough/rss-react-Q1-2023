@@ -1,5 +1,5 @@
 import React from 'react';
-
+import styles from './index.module.scss';
 // interface SearchBarProps {}
 
 // interface SearchBarState {}
@@ -35,6 +35,8 @@ class SearchBar extends React.Component {
         id=""
         value={this.state.inputValue}
         onChange={(el) => this.setState({ inputValue: el.target.value })}
+        placeholder="enter text"
+        className={styles.searchBar}
       />
     );
   }
