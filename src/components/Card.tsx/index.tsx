@@ -33,7 +33,7 @@ class Card extends React.Component<IProps, IState> {
   render() {
     return (
       <div className="card">
-        <img src="" alt="" />
+        <img src={this.props.imageUrl} alt="" />
         <div>
           <span>{this.props.name} </span>
           <span>total price: {this.state.count * this.props.price}</span>
