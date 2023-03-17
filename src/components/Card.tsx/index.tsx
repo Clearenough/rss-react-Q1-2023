@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './index.module.scss';
 
 interface IProps {
   imageUrl: string;
@@ -32,16 +33,20 @@ class Card extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <div className="card">
-        <img src={this.props.imageUrl} alt="" />
-        <div>
-          <span>{this.props.name} </span>
+      <div className={styles.card}>
+        <img src={this.props.imageUrl} alt="" className={styles.image} />
+        <div className={styles.description}>
+          <span>{this.props.name}</span>
           <span>total price: {this.state.count * this.props.price}</span>
         </div>
-        <div>
-          <button onClick={this.decreaseCount}> - </button>
+        <div className={styles.counter}>
+          <button className={styles.button} onClick={this.decreaseCount}>
+            -
+          </button>
           <span>{this.state.count}</span>
-          <button onClick={this.increaseCount}> + </button>
+          <button className={styles.button} onClick={this.increaseCount}>
+            +
+          </button>
         </div>
       </div>
     );
