@@ -15,5 +15,5 @@
     "baseUrl": "./src",
     "resolveJsonModule": true
   },
-  "include": ["./src/**/*", "styled.d.ts", ".eslintrc.json "]
+  "include": ["./src/**/*", "styled.d.ts", ".eslintrc.json ", "vite.config.ts"]
 }
