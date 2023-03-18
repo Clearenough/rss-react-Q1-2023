@@ -13,6 +13,7 @@ function Header() {
               fontWeight: isActive ? '700' : '400',
             };
           }}
+          role="link"
         >
           Welcome Page
         </NavLink>
@@ -24,6 +25,7 @@ function Header() {
               fontWeight: isActive ? '700' : '400',
             };
           }}
+          role="link"
         >
           About Us
         </NavLink>
