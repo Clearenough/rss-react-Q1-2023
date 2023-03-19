@@ -7,7 +7,7 @@ function Header() {
       <nav className={styles.navigation}>
         <NavLink
           to="/"
-          style={({ isActive, isPending }) => {
+          style={({ isActive }) => {
             return {
               color: isActive ? 'red' : 'white',
               fontWeight: isActive ? '700' : '400',
@@ -19,7 +19,7 @@ function Header() {
         </NavLink>
         <NavLink
           to="/about"
-          style={({ isActive, isPending }) => {
+          style={({ isActive }) => {
             return {
               color: isActive ? 'red' : 'white',
               fontWeight: isActive ? '700' : '400',
