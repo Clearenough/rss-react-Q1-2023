@@ -37,14 +37,14 @@ class Card extends React.Component<IProps, IState> {
         <img src={this.props.imageUrl} alt="" className={styles.image} />
         <div className={styles.description}>
           <span>{this.props.name}</span>
-          <span>total price: {this.state.count * this.props.price}</span>
+          <span role="price">total price: {this.state.count * this.props.price}</span>
         </div>
         <div className={styles.counter}>
-          <button className={styles.button} onClick={this.decreaseCount}>
+          <button className={styles.button} onClick={this.decreaseCount} role="decrease">
             -
           </button>
           <span>{this.state.count}</span>
-          <button className={styles.button} onClick={this.increaseCount}>
+          <button className={styles.button} onClick={this.increaseCount} role="increase">
             +
           </button>
         </div>
