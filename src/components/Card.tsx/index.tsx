@@ -33,7 +33,7 @@ class Card extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <div className={styles.card}>
+      <div className={styles.card} role="card">
         <img src={this.props.imageUrl} alt="" className={styles.image} />
         <div className={styles.description}>
           <span>{this.props.name}</span>
