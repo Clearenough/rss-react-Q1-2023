@@ -21,36 +21,36 @@
     "imageUrl": "./../src/assets/old.jpeg",
     "name": "old",
     "price": 10,
-    "id": 0
+    "id": 3
   },
   {
     "imageUrl": "./../src/assets/ancient.jpeg",
     "name": "ancient",
     "price": 46,
-    "id": 1
+    "id": 4
   },
   {
     "imageUrl": "./../src/assets/modern.jpeg",
     "name": "modern",
     "price": 3,
-    "id": 2
+    "id": 5
   },
   {
     "imageUrl": "./../src/assets/old.jpeg",
     "name": "old",
     "price": 10,
-    "id": 0
+    "id": 6
   },
   {
     "imageUrl": "./../src/assets/ancient.jpeg",
     "name": "ancient",
     "price": 46,
-    "id": 1
+    "id": 7
   },
   {
     "imageUrl": "./../src/assets/modern.jpeg",
     "name": "modern",
     "price": 3,
-    "id": 2
+    "id": 8
   }
 ]
