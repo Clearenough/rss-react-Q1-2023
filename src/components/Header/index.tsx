@@ -29,6 +29,18 @@ function Header() {
         >
           About Us
         </NavLink>
+        <NavLink
+          to="/form"
+          style={({ isActive }) => {
+            return {
+              color: isActive ? 'red' : 'white',
+              fontWeight: isActive ? '700' : '400',
+            };
+          }}
+          role="link"
+        >
+          Form
+        </NavLink>
       </nav>
     </header>
   );
