@@ -26,20 +26,19 @@ class MyForm extends React.Component<unknown, IMyFormState> {
     let image: File;
     const files = this.inputFileRef.current?.files;
     const inputText = this.inputTextRef.current?.value;
-    const inputDate = this.inputTextRef.current?.value;
-    const select = this.inputTextRef.current!.value;
-    const inputCheckbox = this.inputTextRef.current!.value as unknown as boolean;
-    const inputRadio = this.inputTextRef.current!.value as unknown as boolean;
+    const inputDate = this.inputDateRef.current?.value;
+    const select = this.selectRef.current!.value;
+    const inputCheckbox = this.inputRadioRef.current!.value as unknown as boolean;
+    const inputRadio = this.inputFileRef.current!.value as unknown as boolean;
 
-    console.log(this.state);
+    this.setState({
+      isTextFilled: inputText ? true : false,
+      isDateChoosed: inputDate ? true : false,
+      isImageChoosed: files?.length ? true : false,
+    });
 
-    if (files && inputText && inputDate) {
+    if (files?.length && inputText && inputDate) {
       image = files[0];
-      this.setState({
-        isTextFilled: true,
-        isDateChoosed: true,
-        isImageChoosed: true,
-      });
       const infoForCard: IFormCard = {
         text: inputText,
         date: inputDate,
@@ -48,7 +47,6 @@ class MyForm extends React.Component<unknown, IMyFormState> {
         isRadioTurned: inputRadio,
         imageUrl: this.getImageUrl(image),
       };
-      console.log(infoForCard);
     }
   };
 
