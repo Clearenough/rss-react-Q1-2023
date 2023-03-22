@@ -25,16 +25,28 @@ class MyForm extends React.Component<unknown, IMyFormState> {
     event.preventDefault();
     let image: File;
     const files = this.inputFileRef.current?.files;
-    if (files) {
-      image = files[0];
+    const inputText = this.inputTextRef.current?.value;
+    const inputDate = this.inputTextRef.current?.value;
+    const select = this.inputTextRef.current!.value;
+    const inputCheckbox = this.inputTextRef.current!.value as unknown as boolean;
+    const inputRadio = this.inputTextRef.current!.value as unknown as boolean;
 
+    console.log(this.state);
+
+    if (files && inputText && inputDate) {
+      image = files[0];
+      this.setState({
+        isTextFilled: true,
+        isDateChoosed: true,
+        isImageChoosed: true,
+      });
       const infoForCard: IFormCard = {
-        text: this.inputTextRef.current?.value,
-        date: this.inputDateRef.current?.value,
-        select: this.selectRef.current?.value,
-        leaveHim: this.inputCheckboxRef.current?.checked,
-        isRadioTurned: this.inputRadioRef.current?.checked,
-        imageUrl: image ? this.getImageUrl(image) : undefined,
+        text: inputText,
+        date: inputDate,
+        select: select,
+        leaveHim: inputCheckbox,
+        isRadioTurned: inputRadio,
+        imageUrl: this.getImageUrl(image),
       };
       console.log(infoForCard);
     }
@@ -49,8 +61,10 @@ class MyForm extends React.Component<unknown, IMyFormState> {
       <form onSubmit={this.onSubmit}>
         <input type="text" name="text" ref={this.inputTextRef} />
         <label htmlFor="text">Type something</label>
+        {!this.state.isTextFilled && <span>Error</span>}
         <input type="date" name="date" ref={this.inputDateRef} />
         <label htmlFor="date">pick a random date</label>
+        {!this.state.isDateChoosed && <span>Error</span>}
         <select name="select" ref={this.selectRef}>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
@@ -62,6 +76,7 @@ class MyForm extends React.Component<unknown, IMyFormState> {
         <label htmlFor="radio">turn on the radio</label>
         <input type="file" name="file" accept="image/jpeg,image/png" ref={this.inputFileRef} />
         <label htmlFor="file">pick photo</label>
+        {!this.state.isImageChoosed && <span>Error</span>}
         <button type="submit">Create Card</button>
       </form>
     );
