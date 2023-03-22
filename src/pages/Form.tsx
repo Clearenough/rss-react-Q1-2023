@@ -1,12 +1,18 @@
 import { IFormCard } from './../@types/common';
 import React, { createRef, RefObject } from 'react';
 
-// interface MyFormProps {}
+interface IMyFormState {
+  isTextFilled: boolean;
+  isDateChoosed: boolean;
+  isImageChoosed: boolean;
+}
 
-// interface MyFormState {}
-
-class MyForm extends React.Component {
-  // state = { :  }
+class MyForm extends React.Component<unknown, IMyFormState> {
+  state: IMyFormState = {
+    isTextFilled: false,
+    isDateChoosed: false,
+    isImageChoosed: false,
+  };
 
   inputTextRef: RefObject<HTMLInputElement> = createRef();
   inputDateRef: RefObject<HTMLInputElement> = createRef();
@@ -17,14 +23,25 @@ class MyForm extends React.Component {
 
   onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const infoForCard: IFormCard = {
-      text: this.inputTextRef.current?.value,
-      date: this.inputDateRef.current?.value,
-      select: this.selectRef.current?.value,
-      leaveHim: this.inputCheckboxRef.current?.checked,
-      isRadioTurned: this.inputRadioRef.current?.checked,
-      imageUrl: 'null',
-    };
+    let image: File;
+    const files = this.inputFileRef.current?.files;
+    if (files) {
+      image = files[0];
+
+      const infoForCard: IFormCard = {
+        text: this.inputTextRef.current?.value,
+        date: this.inputDateRef.current?.value,
+        select: this.selectRef.current?.value,
+        leaveHim: this.inputCheckboxRef.current?.checked,
+        isRadioTurned: this.inputRadioRef.current?.checked,
+        imageUrl: image ? this.getImageUrl(image) : undefined,
+      };
+      console.log(infoForCard);
+    }
+  };
+
+  getImageUrl = (image: File): string => {
+    return URL.createObjectURL(image);
   };
 
   render() {
