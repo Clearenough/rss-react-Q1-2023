@@ -1,10 +1,12 @@
 import { IFormCard } from './../@types/common';
 import React, { createRef, RefObject } from 'react';
+import FormCards from './../components/FormCards';
 
 interface IMyFormState {
   isTextFilled: boolean;
   isDateChoosed: boolean;
   isImageChoosed: boolean;
+  cards: IFormCard[];
 }
 
 class MyForm extends React.Component<unknown, IMyFormState> {
@@ -12,6 +14,7 @@ class MyForm extends React.Component<unknown, IMyFormState> {
     isTextFilled: false,
     isDateChoosed: false,
     isImageChoosed: false,
+    cards: [],
   };
 
   inputTextRef: RefObject<HTMLInputElement> = createRef();
@@ -23,6 +26,7 @@ class MyForm extends React.Component<unknown, IMyFormState> {
 
   onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(this.state);
     let image: File;
     const files = this.inputFileRef.current?.files;
     const inputText = this.inputTextRef.current?.value;
@@ -47,6 +51,7 @@ class MyForm extends React.Component<unknown, IMyFormState> {
         isRadioTurned: inputRadio,
         imageUrl: this.getImageUrl(image),
       };
+      this.addCard(infoForCard);
     }
   };
 
@@ -54,29 +59,38 @@ class MyForm extends React.Component<unknown, IMyFormState> {
     return URL.createObjectURL(image);
   };
 
+  addCard = (card: IFormCard) => {
+    const newCardsArray: IFormCard[] = [...this.state.cards];
+    newCardsArray.push(card);
+    this.setState({ cards: newCardsArray });
+  };
+
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
-        <input type="text" name="text" ref={this.inputTextRef} />
-        <label htmlFor="text">Type something</label>
-        {!this.state.isTextFilled && <span>Error</span>}
-        <input type="date" name="date" ref={this.inputDateRef} />
-        <label htmlFor="date">pick a random date</label>
-        {!this.state.isDateChoosed && <span>Error</span>}
-        <select name="select" ref={this.selectRef}>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </select>
-        <label htmlFor="select">Yes or No, what would you choose?</label>
-        <input type="checkbox" name="checkbox" ref={this.inputCheckboxRef} />
-        <label htmlFor="checkbox">leave him alone he doesnt want to be disturbed</label>
-        <input type="radio" name="radio" ref={this.inputRadioRef} />
-        <label htmlFor="radio">turn on the radio</label>
-        <input type="file" name="file" accept="image/jpeg,image/png" ref={this.inputFileRef} />
-        <label htmlFor="file">pick photo</label>
-        {!this.state.isImageChoosed && <span>Error</span>}
-        <button type="submit">Create Card</button>
-      </form>
+      <div>
+        <form onSubmit={this.onSubmit}>
+          <input type="text" name="text" ref={this.inputTextRef} />
+          <label htmlFor="text">Type something</label>
+          {!this.state.isTextFilled && <span>Error</span>}
+          <input type="date" name="date" ref={this.inputDateRef} />
+          <label htmlFor="date">pick a random date</label>
+          {!this.state.isDateChoosed && <span>Error</span>}
+          <select name="select" ref={this.selectRef}>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+          <label htmlFor="select">Yes or No, what would you choose?</label>
+          <input type="checkbox" name="checkbox" ref={this.inputCheckboxRef} />
+          <label htmlFor="checkbox">leave him alone he doesnt want to be disturbed</label>
+          <input type="radio" name="radio" ref={this.inputRadioRef} />
+          <label htmlFor="radio">turn on the radio</label>
+          <input type="file" name="file" accept="image/jpeg,image/png" ref={this.inputFileRef} />
+          <label htmlFor="file">pick photo</label>
+          {!this.state.isImageChoosed && <span>Error</span>}
+          <button type="submit">Create Card</button>
+        </form>
+        <FormCards cards={this.state.cards} />
+      </div>
     );
   }
 }
