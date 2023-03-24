@@ -2,12 +2,14 @@ import { IFormCard } from './../@types/common';
 import React, { createRef, RefObject } from 'react';
 import FormCards from './../components/FormCards';
 import styles from './Form.module.scss';
+import ConfirmationMessage from './../components/ConfirmationMessage';
 
 interface IMyFormState {
   isTextFilled: boolean;
   isDateChoosed: boolean;
   isImageChoosed: boolean;
   cards: IFormCard[];
+  isConfirmation: boolean;
 }
 
 class MyForm extends React.Component<unknown, IMyFormState> {
@@ -16,6 +18,7 @@ class MyForm extends React.Component<unknown, IMyFormState> {
     isDateChoosed: true,
     isImageChoosed: true,
     cards: [],
+    isConfirmation: false,
   };
 
   inputTextRef: RefObject<HTMLInputElement> = createRef();
@@ -52,6 +55,8 @@ class MyForm extends React.Component<unknown, IMyFormState> {
         imageUrl: this.getImageUrl(image),
       };
       this.addCard(infoForCard);
+      this.setState({ isConfirmation: true });
+      setTimeout(() => this.setState({ isConfirmation: false }), 500);
     }
   };
 
@@ -149,6 +154,7 @@ class MyForm extends React.Component<unknown, IMyFormState> {
           </button>
         </form>
         <FormCards cards={this.state.cards} />
+        {this.state.isConfirmation && <ConfirmationMessage />}
       </div>
     );
   }
