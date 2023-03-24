@@ -10,8 +10,8 @@ function FormCard({ text, date, select, leaveHim, isRadioTurned, imageUrl }: IFo
         <span role="price">{date}</span>
       </div>
       <div>{select}</div>
-      <div>{leaveHim}</div>
-      <div>{isRadioTurned}</div>
+      <div>{leaveHim ? 'he is annoyed' : 'he is calm'}</div>
+      <div>{isRadioTurned ? 'radio on' : 'radio off'}</div>
     </div>
   );
 }
