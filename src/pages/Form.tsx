@@ -32,8 +32,8 @@ class MyForm extends React.Component<unknown, IMyFormState> {
     const inputText = this.inputTextRef.current?.value;
     const inputDate = this.inputDateRef.current?.value;
     const select = this.selectRef.current!.value;
-    const inputCheckbox = this.inputRadioRef.current!.value as unknown as boolean;
-    const inputRadio = this.inputFileRef.current!.value as unknown as boolean;
+    const inputCheckbox = this.inputCheckboxRef.current!.checked;
+    const inputRadio = this.inputRadioRef.current!.checked;
 
     this.setState({
       isTextFilled: inputText ? true : false,
