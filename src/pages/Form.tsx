@@ -73,7 +73,7 @@ class MyForm extends React.Component<unknown, IMyFormState> {
   render() {
     return (
       <div>
-        <form className={styles.form} onSubmit={this.onSubmit}>
+        <form className={styles.form} onSubmit={this.onSubmit} role="form">
           <div className={styles.inputLayout}>
             <label htmlFor="text">Type something: </label>
             <input
@@ -82,8 +82,13 @@ class MyForm extends React.Component<unknown, IMyFormState> {
               name="text"
               id="text"
               ref={this.inputTextRef}
+              role="text-input"
             />
-            {!this.state.isTextFilled && <span className={styles.error}>Error</span>}
+            {!this.state.isTextFilled && (
+              <span className={styles.error} role="text-error">
+                Error
+              </span>
+            )}
           </div>
 
           <div className={styles.inputLayout}>
@@ -94,9 +99,14 @@ class MyForm extends React.Component<unknown, IMyFormState> {
               name="date"
               id="date"
               ref={this.inputDateRef}
+              role="date-input"
             />
 
-            {!this.state.isDateChoosed && <span className={styles.error}>Error</span>}
+            {!this.state.isDateChoosed && (
+              <span className={styles.error} role="date-error">
+                Error
+              </span>
+            )}
           </div>
 
           <div className={styles.inputLayout}>
@@ -106,6 +116,7 @@ class MyForm extends React.Component<unknown, IMyFormState> {
               name="select"
               id="select"
               ref={this.selectRef}
+              role="select"
             >
               <option value="Yes">Yes</option>
               <option value="No">No</option>
@@ -120,6 +131,7 @@ class MyForm extends React.Component<unknown, IMyFormState> {
               name="checkbox"
               id="checkbox"
               ref={this.inputCheckboxRef}
+              role="checkbox"
             />
           </div>
 
@@ -131,6 +143,7 @@ class MyForm extends React.Component<unknown, IMyFormState> {
               name="radio"
               id="radio"
               ref={this.inputRadioRef}
+              role="radio-input"
             />
           </div>
 
@@ -145,11 +158,16 @@ class MyForm extends React.Component<unknown, IMyFormState> {
               id="file"
               accept="image/jpeg,image/png"
               ref={this.inputFileRef}
+              role="file-input"
             />
-            {!this.state.isImageChoosed && <span className={styles.error}>Error</span>}
+            {!this.state.isImageChoosed && (
+              <span className={styles.error} role="file-error">
+                Error
+              </span>
+            )}
           </div>
 
-          <button className={styles.submit} type="submit">
+          <button className={styles.submit} type="submit" role="submit">
             Create Card
           </button>
         </form>
