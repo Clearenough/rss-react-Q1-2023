@@ -56,6 +56,7 @@ class MyForm extends React.Component<unknown, IMyFormState> {
       };
       this.addCard(infoForCard);
       this.setState({ isConfirmation: true });
+      this.formCleaner();
       setTimeout(() => this.setState({ isConfirmation: false }), 500);
     }
   };
@@ -68,6 +69,22 @@ class MyForm extends React.Component<unknown, IMyFormState> {
     const newCardsArray: IFormCard[] = [...this.state.cards];
     newCardsArray.push(card);
     this.setState({ cards: newCardsArray });
+  };
+
+  formCleaner = () => {
+    const files = this.inputFileRef.current!.files;
+    const inputText = this.inputTextRef.current!.value;
+    const inputDate = this.inputDateRef.current!.value;
+    const select = this.selectRef.current!.value;
+    const inputCheckbox = this.inputCheckboxRef.current!.checked;
+    const inputRadio = this.inputRadioRef.current!.checked;
+
+    this.inputFileRef.current!.files = null;
+    this.inputTextRef.current!.value = '';
+    this.inputDateRef.current!.value = '';
+    this.selectRef.current!.value = 'Yes';
+    this.inputCheckboxRef.current!.checked = false;
+    this.inputRadioRef.current!.checked = false;
   };
 
   render() {
