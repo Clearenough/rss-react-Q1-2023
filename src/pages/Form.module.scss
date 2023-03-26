@@ -1,0 +1,44 @@
+.inputLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .error {
+    color: rgb(205, 31, 31);
+  }
+
+  .inputWithField {
+    max-width: 200px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .clickableField {
+    align-self: flex-start;
+    transform: scale(1.25);
+  }
+
+  .invisible {
+    display: none;
+  }
+
+  .photoLable {
+    max-width: 200px;
+    padding: 10px;
+    border: solid 1px black;
+    background-color: white;
+  }
+
+  .submit {
+    max-width: 200px;
+    padding: 10px;
+    border: solid 1px black;
+    border-radius: 10px;
+  }
+}
