@@ -1,34 +1,33 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 
-class SearchBar extends React.Component {
-  state = { inputValue: '' };
+function SearchBar() {
+  const [inputValue, setInputValue] = useState('');
 
-  componentDidMount() {
-    const inputValue = localStorage.getItem('INPUT_VALUE');
-    if (inputValue) {
-      this.setState({ inputValue: inputValue });
+  useEffect(() => {
+    const storageInputValue = localStorage.getItem('INPUT_VALUE');
+    if (storageInputValue) {
+      setInputValue(storageInputValue);
     }
-  }
+  }, []);
 
-  componentWillUnmount() {
-    const inputValue = this.state.inputValue;
-    localStorage.setItem('INPUT_VALUE', inputValue);
-  }
+  useEffect(() => {
+    return () => {
+      localStorage.setItem('INPUT_VALUE', inputValue);
+    };
+  }, [inputValue]);
 
-  render() {
-    return (
-      <input
-        type="search"
-        name=""
-        id=""
-        value={this.state.inputValue}
-        onChange={(el) => this.setState({ inputValue: el.target.value })}
-        placeholder="enter text"
-        className={styles.searchBar}
-      />
-    );
-  }
+  return (
+    <input
+      type="search"
+      name=""
+      id=""
+      value={inputValue}
+      onChange={(el) => setInputValue(el.target.value)}
+      placeholder="enter text"
+      className={styles.searchBar}
+    />
+  );
 }
 
 export default SearchBar;
