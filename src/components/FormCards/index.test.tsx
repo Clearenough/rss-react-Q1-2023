@@ -8,7 +8,7 @@ const cardsArray: IFormCard[] = [
     date: 'undefined',
     select: 'undefined',
     leaveHim: false,
-    isRadioTurned: false,
+    isRadioTurned: '',
     imageUrl: 'undefined',
   },
   {
@@ -16,7 +16,7 @@ const cardsArray: IFormCard[] = [
     date: 'undefined',
     select: 'undefined',
     leaveHim: false,
-    isRadioTurned: false,
+    isRadioTurned: '',
     imageUrl: 'undefined',
   },
 ];

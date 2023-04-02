@@ -9,7 +9,7 @@ describe('card', () => {
         date={'12.34.12'}
         select={'sf'}
         leaveHim={false}
-        isRadioTurned={true}
+        isRadioTurned={''}
         imageUrl={'hi'}
       />
     );

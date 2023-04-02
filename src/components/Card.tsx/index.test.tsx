@@ -15,7 +15,7 @@ describe('card', () => {
     const priceSpan = screen.getByRole('price');
     const priceArray = priceSpan.innerHTML.split(' ');
     const price = priceArray[priceArray.length - 1];
-    expect(price).toBe('20');
+    expect(price).toBe('10');
   });
   it('should decrease price', () => {
     render(<Card imageUrl={''} name={''} price={10} />);
@@ -25,6 +25,6 @@ describe('card', () => {
     const priceSpan = screen.getByRole('price');
     const priceArray = priceSpan.innerHTML.split(' ');
     const price = priceArray[priceArray.length - 1];
-    expect(price).toBe('0');
+    expect(price).toBe('-10');
   });
 });

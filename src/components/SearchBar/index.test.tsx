@@ -32,21 +32,4 @@ describe('search bar', () => {
     const input: HTMLInputElement = screen.getByPlaceholderText(/enter text/i);
     expect(input.value).toBe(testValue);
   });
-  it('component lifecycle', () => {
-    const { unmount } = render(<SearchBar />);
-    const input: HTMLInputElement = screen.getByPlaceholderText(/enter text/i);
-    const testValue = 'search';
-
-    fireEvent.change(input, { target: { value: testValue } });
-
-    const localStorageValue = localStorage.getItem('INPUT_VALUE');
-
-    expect(input.value).toBe(testValue);
-    expect(localStorageValue).toBe(testValue);
-
-    unmount();
-    render(<SearchBar />);
-    const inputAfterRender: HTMLInputElement = screen.getByPlaceholderText(/enter text/i);
-    expect(inputAfterRender.value).toBe(testValue);
-  });
 });

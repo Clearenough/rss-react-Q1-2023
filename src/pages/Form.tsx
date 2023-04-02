@@ -1,5 +1,5 @@
 import { IFormCard, IFormData } from './../@types/common';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import FormCards from './../components/FormCards';
 import styles from './Form.module.scss';
 import ConfirmationMessage from './../components/ConfirmationMessage';
@@ -11,10 +11,17 @@ function MyForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
+    reset,
   } = useForm<IFormData>({ mode: 'onSubmit', reValidateMode: 'onSubmit' });
   const { onChange, ref } = register('imageUrl');
   const fileRef = useRef<HTMLInputElement>();
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [reset, isSubmitSuccessful]);
 
   const onSubmit = (formData: IFormData) => {
     console.log(formData);
