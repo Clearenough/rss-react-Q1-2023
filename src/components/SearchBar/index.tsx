@@ -1,7 +1,13 @@
-import { useEffect, useState } from 'react';
+import { APIResult, ICharacterCard } from '../../@types/common';
+import React, { ReactEventHandler, useEffect, useState } from 'react';
+import { fetchURL } from '../../utils/constants';
 import styles from './index.module.scss';
 
-function SearchBar() {
+interface IProps {
+  addCards: (cards: ICharacterCard[]) => void;
+}
+
+function SearchBar({ addCards }: IProps) {
   const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
@@ -17,16 +23,36 @@ function SearchBar() {
     };
   }, [inputValue]);
 
+  useEffect(() => {
+    (async function () {
+      const data = fetchCharacter('rick');
+      addCards((await data).results);
+    })();
+  }, [addCards, inputValue]);
+
+  async function fetchCharacter(name?: string): Promise<APIResult> {
+    const response = await fetch(`${fetchURL}?name=${name}`);
+    const data: APIResult = await response.json();
+    return data;
+  }
+
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+  }
+
   return (
-    <input
-      type="search"
-      name=""
-      id=""
-      value={inputValue}
-      onChange={(el) => setInputValue(el.target.value)}
-      placeholder="enter text"
-      className={styles.searchBar}
-    />
+    <form onSubmit={onSubmit}>
+      <input
+        type="search"
+        name=""
+        id=""
+        value={inputValue}
+        onChange={(el) => setInputValue(el.target.value)}
+        placeholder="enter text"
+        className={styles.searchBar}
+      />
+      <button type="submit">Search</button>
+    </form>
   );
 }
 

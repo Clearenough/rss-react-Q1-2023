@@ -1,22 +1,25 @@
 import Card from './../Card.tsx';
 import cardsInfo from './../../assets/cardsInfo.json';
 import styles from './index.module.scss';
+import { ICharacterCard } from '../../@types/common';
 
-interface ICard {
-  imageUrl: string;
-  name: string;
-  price: number;
-  id: number;
+// interface ICard {
+//   imageUrl: string;
+//   name: string;
+//   price: number;
+//   id: number;
+// }
+
+interface IProps {
+  cards: ICharacterCard[];
 }
 
-function CardsList() {
-  const cardsInfoParce: ICard[] = JSON.parse(JSON.stringify(cardsInfo));
-
+function CardsList({ cards }: IProps) {
+  console.log(cards, 'cards');
   return (
     <div className={styles.cards}>
-      {cardsInfoParce.map((card) => {
-        const { imageUrl, name, price, id } = card;
-        return <Card imageUrl={imageUrl} name={name} price={price} key={id} />;
+      {cards.map((card) => {
+        return <Card {...card} key={card.id} />;
       })}
     </div>
   );

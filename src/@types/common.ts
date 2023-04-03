@@ -15,3 +15,18 @@ export interface IFormData {
   radio: string;
   imageUrl: FileList;
 }
+
+export interface ICharacterCard {
+  gender: string;
+  id: number;
+  location: {
+    name: string;
+  };
+  name: string;
+  species: string;
+  status: string;
+}
+
+export interface APIResult {
+  results: ICharacterCard[];
+}

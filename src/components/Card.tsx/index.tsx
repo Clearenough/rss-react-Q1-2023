@@ -1,30 +1,26 @@
+import { ICharacterCard } from '../../@types/common';
 import { useState } from 'react';
 import styles from './index.module.scss';
 
-interface IProps {
-  imageUrl: string;
-  name: string;
-  price: number;
-}
+// interface IProps {
+//   imageUrl: string;
+//   name: string;
+//   price: number;
+// }
 
-function Card({ imageUrl, name, price }: IProps) {
+function Card({ gender, location, name, species, status }: ICharacterCard) {
   const [count, setCount] = useState(0);
 
   return (
     <div className={styles.card} role="card">
-      <img src={imageUrl} alt="" className={styles.image} />
       <div className={styles.description}>
-        <span>{name}</span>
-        <span role="price">total price: {count * price}</span>
+        <span role="name">{name}</span>
+        <span role="species">{species}</span>
+        <span role="gender">{gender}</span>
       </div>
       <div className={styles.counter}>
-        <button className={styles.button} onClick={() => setCount(count - 1)} role="decrease">
-          -
-        </button>
-        <span>{count}</span>
-        <button className={styles.button} onClick={() => setCount(count + 1)} role="increase">
-          +
-        </button>
+        <span role="location">{location.name}</span>
+        <span role="status">{status}</span>
       </div>
     </div>
   );
