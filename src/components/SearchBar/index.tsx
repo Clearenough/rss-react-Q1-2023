@@ -9,11 +9,13 @@ interface IProps {
 
 function SearchBar({ addCards }: IProps) {
   const [inputValue, setInputValue] = useState('');
+  const [searchValue, setSearchValue] = useState('rick');
 
   useEffect(() => {
     const storageInputValue = localStorage.getItem('INPUT_VALUE');
     if (storageInputValue) {
       setInputValue(storageInputValue);
+      setSearchValue(storageInputValue);
     }
   }, []);
 
@@ -25,10 +27,10 @@ function SearchBar({ addCards }: IProps) {
 
   useEffect(() => {
     (async function () {
-      const data = fetchCharacter('rick');
+      const data = fetchCharacter(searchValue);
       addCards((await data).results);
     })();
-  }, [addCards, inputValue]);
+  }, [addCards, searchValue]);
 
   async function fetchCharacter(name?: string): Promise<APIResult> {
     const response = await fetch(`${fetchURL}?name=${name}`);
@@ -38,6 +40,7 @@ function SearchBar({ addCards }: IProps) {
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setSearchValue(inputValue);
   }
 
   return (
