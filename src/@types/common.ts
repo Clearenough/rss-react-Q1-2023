@@ -25,6 +25,7 @@ export interface ICharacterCard {
   name: string;
   species: string;
   status: string;
+  image: string;
 }
 
 export interface APIResult {

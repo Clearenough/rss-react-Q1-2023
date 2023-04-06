@@ -1,6 +1,7 @@
 import { ICharacterCard } from '../../@types/common';
 import { useState } from 'react';
 import styles from './index.module.scss';
+import CardModal from './../CardModal';
 
 // interface IProps {
 //   imageUrl: string;
@@ -8,20 +9,23 @@ import styles from './index.module.scss';
 //   price: number;
 // }
 
-function Card({ gender, location, name, species, status }: ICharacterCard) {
-  const [count, setCount] = useState(0);
+function Card(card: ICharacterCard) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className={styles.card} role="card">
+    <div
+      className={styles.card}
+      role="card"
+      onClick={(e) => {
+        e.stopPropagation();
+        setIsModalOpen(true);
+      }}
+    >
+      <img src={card.image} alt={card.name + 'image'} />
       <div className={styles.description}>
-        <span role="name">{name}</span>
-        <span role="species">{species}</span>
-        <span role="gender">{gender}</span>
+        <span role="name">{card.name}</span>
       </div>
-      <div className={styles.counter}>
-        <span role="location">{location.name}</span>
-        <span role="status">{status}</span>
-      </div>
+      {isModalOpen && <CardModal {...card} handler={setIsModalOpen} />}
     </div>
   );
 }
