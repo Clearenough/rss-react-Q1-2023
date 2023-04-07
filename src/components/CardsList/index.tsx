@@ -12,15 +12,17 @@ import { ICharacterCard } from '../../@types/common';
 
 interface IProps {
   cards: ICharacterCard[];
+  error: string;
 }
 
-function CardsList({ cards }: IProps) {
+function CardsList({ cards, error }: IProps) {
   console.log(cards, 'cards');
   return (
     <div className={styles.cards}>
       {cards.map((card) => {
         return <Card {...card} key={card.id} />;
       })}
+      {error && <div className={styles.error}>Error: {error}</div>}
     </div>
   );
 }

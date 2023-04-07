@@ -5,11 +5,12 @@ import SearchBar from './../components/SearchBar';
 
 function MainPage() {
   const [cards, addCards] = useState<ICharacterCard[]>([]);
+  const [error, setError] = useState('');
   console.log(cards);
   return (
     <>
-      <SearchBar addCards={addCards} />
-      <CardsList cards={cards} />
+      <SearchBar addCards={addCards} setError={setError} />
+      <CardsList cards={cards} error={error} />
     </>
   );
 }

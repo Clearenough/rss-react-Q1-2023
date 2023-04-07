@@ -21,7 +21,7 @@ function Card(card: ICharacterCard) {
         setIsModalOpen(true);
       }}
     >
-      <img src={card.image} alt={card.name + 'image'} />
+      <img src={card.image} alt={card.name + 'image'} className={styles.image} />
       <div className={styles.description}>
         <span role="name">{card.name}</span>
       </div>

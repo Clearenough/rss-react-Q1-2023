@@ -29,5 +29,6 @@ export interface ICharacterCard {
 }
 
 export interface APIResult {
-  results: ICharacterCard[];
+  results?: ICharacterCard[];
+  error?: string;
 }

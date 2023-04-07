@@ -5,9 +5,10 @@ import styles from './index.module.scss';
 
 interface IProps {
   addCards: (cards: ICharacterCard[]) => void;
+  setError: (error: string) => void;
 }
 
-function SearchBar({ addCards }: IProps) {
+function SearchBar({ addCards, setError }: IProps) {
   const [inputValue, setInputValue] = useState('');
   const [searchValue, setSearchValue] = useState('rick');
 
@@ -27,10 +28,21 @@ function SearchBar({ addCards }: IProps) {
 
   useEffect(() => {
     (async function () {
-      const data = fetchCharacter(searchValue);
-      addCards((await data).results);
+      const res = fetchCharacter(searchValue);
+      const data = await res;
+      console.log(data);
+      if (data.results) {
+        addCards(data.results);
+        setError('');
+        return;
+      }
+      if (data.error) {
+        addCards([]);
+        setError(data.error);
+        return;
+      }
     })();
-  }, [addCards, searchValue]);
+  }, [addCards, searchValue, setError]);
 
   async function fetchCharacter(name?: string): Promise<APIResult> {
     const response = await fetch(`${fetchURL}?name=${name}`);
