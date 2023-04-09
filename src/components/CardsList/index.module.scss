@@ -1,0 +1,9 @@
+.cards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .error {
+    color: red;
+  }
+}
